@@ -1,4 +1,4 @@
-package com.stockmanagement.StockManagement.DataAccess.Abstract;
+package com.stockmanagement.StockManagement.repository;
 
 import java.util.List;
 

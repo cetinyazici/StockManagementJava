@@ -1,7 +1,7 @@
-package com.stockmanagement.StockManagement.Business.Concrete;
+package com.stockmanagement.StockManagement.service.impl;
 
-import com.stockmanagement.StockManagement.Business.Abstract.IGenericService;
-import com.stockmanagement.StockManagement.DataAccess.Abstract.IGenericRepository;
+import com.stockmanagement.StockManagement.service.IGenericService;
+import com.stockmanagement.StockManagement.repository.IGenericRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

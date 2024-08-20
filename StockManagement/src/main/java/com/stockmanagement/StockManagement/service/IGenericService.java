@@ -1,4 +1,4 @@
-package com.stockmanagement.StockManagement.Business.Abstract;
+package com.stockmanagement.StockManagement.service;
 
 import java.util.List;
 

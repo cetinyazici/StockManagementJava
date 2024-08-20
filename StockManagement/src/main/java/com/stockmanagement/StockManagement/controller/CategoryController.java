@@ -1,7 +1,7 @@
-package com.stockmanagement.StockManagement.Web.Controller;
+package com.stockmanagement.StockManagement.controller;
 
-import com.stockmanagement.StockManagement.Business.Abstract.ICategoryService;
-import com.stockmanagement.StockManagement.Entities.Category;
+import com.stockmanagement.StockManagement.service.ICategoryService;
+import com.stockmanagement.StockManagement.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class CategoryController {
     @GetMapping("/list")
     public String getAllCategories(Model model){
         List<Category> categories = service.getAll();
-        model.addAttribute("categories",categories);
+        model.addAttribute("categories", categories);
         return "categories/list";
     }
 }

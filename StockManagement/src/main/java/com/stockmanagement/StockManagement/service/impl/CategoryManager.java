@@ -1,8 +1,8 @@
-package com.stockmanagement.StockManagement.Business.Concrete;
+package com.stockmanagement.StockManagement.service.impl;
 
-import com.stockmanagement.StockManagement.Business.Abstract.ICategoryService;
-import com.stockmanagement.StockManagement.DataAccess.Abstract.ICategoryRepository;
-import com.stockmanagement.StockManagement.Entities.Category;
+import com.stockmanagement.StockManagement.service.ICategoryService;
+import com.stockmanagement.StockManagement.repository.ICategoryRepository;
+import com.stockmanagement.StockManagement.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

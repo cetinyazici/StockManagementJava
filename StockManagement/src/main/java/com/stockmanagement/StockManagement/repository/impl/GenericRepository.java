@@ -1,6 +1,6 @@
-package com.stockmanagement.StockManagement.DataAccess.Concrete;
+package com.stockmanagement.StockManagement.repository.impl;
 
-import com.stockmanagement.StockManagement.DataAccess.Abstract.IGenericRepository;
+import com.stockmanagement.StockManagement.repository.IGenericRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;

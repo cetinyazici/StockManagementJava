@@ -1,4 +1,4 @@
-package com.stockmanagement.StockManagement.Entities;
+package com.stockmanagement.StockManagement.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,19 +7,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="supplier")
-public class Supplier {
+@Table(name="warehouse")
+public class Warehouse {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private String contact_info;
+	private String location;
 
-	public Supplier(int id, String name, String contact_info) {
+	public Warehouse(int id, String name, String location) {
 		this.id = id;
 		this.name = name;
-		this.contact_info = contact_info;
+		this.location = location;
 	}
 
 	public int getId() {
@@ -38,12 +38,11 @@ public class Supplier {
 		this.name = name;
 	}
 
-	public String getContact_info() {
-		return contact_info;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setContact_info(String contact_info) {
-		this.contact_info = contact_info;
+	public void setLocation(String location) {
+		this.location = location;
 	}
-
 }
