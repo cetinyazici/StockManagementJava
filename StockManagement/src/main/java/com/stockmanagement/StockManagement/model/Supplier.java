@@ -7,43 +7,47 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="supplier")
+@Table(name = "supplier")
 public class Supplier {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String name;
-	private String contact_info;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private String contact_info;
 
-	public Supplier(int id, String name, String contact_info) {
-		this.id = id;
-		this.name = name;
-		this.contact_info = contact_info;
-	}
+    public Supplier() {
 
-	public int getId() {
-		return id;
-	}
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Supplier(int id, String name, String contact_info) {
+        this.id = id;
+        this.name = name;
+        this.contact_info = contact_info;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getContact_info() {
-		return contact_info;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setContact_info(String contact_info) {
-		this.contact_info = contact_info;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContact_info() {
+        return contact_info;
+    }
+
+    public void setContact_info(String contact_info) {
+        this.contact_info = contact_info;
+    }
 
 }
