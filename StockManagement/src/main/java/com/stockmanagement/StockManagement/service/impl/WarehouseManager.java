@@ -1,29 +1,30 @@
 package com.stockmanagement.StockManagement.service.impl;
 
-import com.stockmanagement.StockManagement.model.Supplier;
-import com.stockmanagement.StockManagement.repository.ISupplierRepository;
-import com.stockmanagement.StockManagement.service.ISupplierService;
+import com.stockmanagement.StockManagement.model.Warehouse;
+import com.stockmanagement.StockManagement.repository.IWarehouseRepository;
+import com.stockmanagement.StockManagement.service.IWarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SupplierManager implements ISupplierService {
-    private final ISupplierRepository repository;
+public class WarehouseManager implements IWarehouseService {
+
+    private final IWarehouseRepository repository;
 
     @Autowired
-    public SupplierManager(ISupplierRepository repository) {
+    public WarehouseManager(IWarehouseRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public void create(Supplier entity) {
+    public void create(Warehouse entity) {
         repository.create(entity);
     }
 
     @Override
-    public void update(Supplier entity) {
+    public void update(Warehouse entity) {
         repository.update(entity);
     }
 
@@ -33,12 +34,12 @@ public class SupplierManager implements ISupplierService {
     }
 
     @Override
-    public List<Supplier> getAll() {
+    public List<Warehouse> getAll() {
         return repository.getAll();
     }
 
     @Override
-    public Supplier getById(int id) {
+    public Warehouse getById(int id) {
         return repository.getById(id);
     }
 }

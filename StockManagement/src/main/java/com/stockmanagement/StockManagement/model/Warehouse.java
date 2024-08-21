@@ -7,42 +7,46 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="warehouse")
+@Table(name = "warehouse")
 public class Warehouse {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String name;
-	private String location;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private String location;
 
-	public Warehouse(int id, String name, String location) {
-		this.id = id;
-		this.name = name;
-		this.location = location;
-	}
+    public Warehouse() {
 
-	public int getId() {
-		return id;
-	}
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Warehouse(int id, String name, String location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
