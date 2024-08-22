@@ -56,6 +56,18 @@ public class StockMovementManager implements IStockMovementService {
     @Override
     public void createStockMovement(StockMovementDTO stockMovementDTO) {
         StockMovement stockMovement = mapper.toEntity(stockMovementDTO);
+
+        Product product = productService.getById(stockMovementDTO.getProductId());
+        int currentStock = product.getStock_quantity();
+        int movementQuantity = stockMovementDTO.getQuantity();
+        String movementType = stockMovementDTO.getMovementType();
+
+        if ("IN".equals(movementType)) {
+            product.setStock_quantity(currentStock + movementQuantity);
+        } else if ("OUT".equals(movementType)) {
+            product.setStock_quantity(currentStock - movementQuantity);
+        }
+        productService.update(product);
         repository.create(stockMovement);
     }
 
@@ -70,23 +82,15 @@ public class StockMovementManager implements IStockMovementService {
             int newQuantity = stockMovementDTO.getQuantity();
             String movementType = stockMovementDTO.getMovementType();
 
-            // Ürünü al
             Product product = productService.getById(stockMovementDTO.getProductId());
             int currentStock = product.getStock_quantity();
 
-            // Stok miktarını güncelle
             if ("IN".equals(movementType)) {
-                // Gelen stok hareketi
-                product.setStock_quantity(currentStock + newQuantity - oldQuantity);
+                product.setStock_quantity(currentStock + newQuantity);
             } else if ("OUT".equals(movementType)) {
-                // Giden stok hareketi
-                product.setStock_quantity(currentStock - newQuantity + oldQuantity);
+                product.setStock_quantity(currentStock - newQuantity);
             }
-
-            // Ürünü güncelle
             productService.update(product);
-
-            // Stok hareketini güncelle
             repository.update(mapper.toEntity(stockMovementDTO));
         }
     }

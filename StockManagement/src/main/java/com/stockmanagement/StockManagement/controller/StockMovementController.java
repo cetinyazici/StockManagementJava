@@ -65,6 +65,9 @@ public class StockMovementController {
         ProductDTO productDTO = productService.getProductDTOById(productId);
         model.addAttribute("productQuantity", productDTO.getStock_quantity());
 
+        // Layout-specific attributes
+        model.addAttribute("title", "Edit Stock Movement");
+        model.addAttribute("header", "Edit Stock Movement");
         return "stockmovements/edit";
     }
 

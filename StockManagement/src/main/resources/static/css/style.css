@@ -1,0 +1,51 @@
+.sidebar {
+          background-color: #343a40;
+          color: #fff;
+          height: 100vh;
+          padding: 2rem;
+        }
+
+        .sidebar h3 {
+          margin-bottom: 1.5rem;
+        }
+
+        .sidebar .nav-link {
+          color: #adb5bd;
+          padding: 0.5rem 1rem;
+        }
+
+        .sidebar .nav-link:hover {
+          color: #fff;
+          background-color: #495057;
+        }
+
+        .sidebar .nav-link.active {
+          color: #fff;
+          background-color: #007bff;
+        }
+
+        .content {
+          padding: 2rem;
+        }
+
+        .card-stats {
+          border: none;
+          box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        }
+
+        .card-stats .card-body {
+          padding: 1rem;
+        }
+
+        .card-stats .card-title {
+          margin-bottom: 0.5rem;
+          font-size: 1.1rem;
+        }
+
+        .card-stats .card-text {
+          font-size: 2rem;
+          font-weight: 700;
+        }
+
+
+
