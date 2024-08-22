@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stock Movement List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Stock Movement List</h1>
+    <a href="/stockmovements/add" class="btn btn-primary mb-3">Create New Stock Movement</a>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Warehouse</th>
+            <th>Quantity</th>
+            <th>Movement Date</th>
+            <th>Movement Type</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stockMovement : ${stockMovements}">
+            <td th:text="${stockMovement.id}"></td>
+            <td th:text="${stockMovement.productName}"></td>
+            <td th:text="${stockMovement.warehouseName}"></td>
+            <td th:text="${stockMovement.quantity}"></td>
+            <td th:text="${stockMovement.movementDate}"></td>
+            <td th:text="${stockMovement.movementType}"></td>
+            <td>
+                <div>
+                    <a th:href="@{/stockmovements/edit/{id}(id=${stockMovement.id})}"
+                       class="btn btn-warning btn-sm me-2">Edit</a>
+
+                    <form th:action="@{/stockmovements/delete/{id}(id=${stockMovement.id})}" method="post"
+                          style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

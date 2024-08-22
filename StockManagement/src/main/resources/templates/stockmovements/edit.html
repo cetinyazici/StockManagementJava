@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Stock Movement</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4" th:text="${stockMovement.id != null ? 'Edit Stock Movement' : 'Add Stock Movement'}"></h1>
+    <form th:action="@{/stockmovements/edit/{id}(id=${stockMovement.id})}" th:object="${stockMovement}" method="post">
+        <div class="form-group">
+            <label for="product">Product:</label>
+            <select id="product" name="productId" class="form-control" required>
+                <option value="" disabled selected>Select a product</option>
+                <option th:each="product : ${products}"
+                        th:value="${product.id}"
+                        th:text="${product.name}"
+                        th:selected="${product.id == stockMovement.productId}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="warehouse">Warehouse:</label>
+            <select id="warehouse" name="warehouseId" class="form-control" required>
+                <option value="" disabled selected>Select a warehouse</option>
+                <option th:each="warehouse : ${warehouses}"
+                        th:value="${warehouse.id}"
+                        th:text="${warehouse.name}"
+                        th:selected="${warehouse.id == stockMovement.warehouseId}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" th:value="${stockMovement.quantity}" class="form-control"
+                   required>
+        </div>
+        <div class="form-group">
+            <label for="movementDate">Movement Date:</label>
+            <input type="date" id="movementDate" name="movementDate" th:value="${stockMovement.movementDate}"
+                   class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="movementType">Movement Type:</label>
+            <select id="movementType" name="movementType" class="form-control" required>
+                <option value="" disabled selected>Select movement type</option>
+                <option value="IN" th:selected="${'IN' == stockMovement.movementType}">IN</option>
+                <option value="OUT" th:selected="${'OUT' == stockMovement.movementType}">OUT</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary"
+                th:text="${stockMovement.id != null ? 'Update Stock Movement' : 'Add Stock Movement'}"></button>
+    </form>
+    <a href="/stockmovements/list" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

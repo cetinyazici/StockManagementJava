@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Stock Movement</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Add Stock Movement</h1>
+    <form th:action="@{/stockmovements/add}" th:object="${stockMovement}" method="post">
+
+        <div class="form-group">
+            <label for="product">Product:</label>
+            <select id="product" name="productId" class="form-control" required>
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="warehouse">Warehouse:</label>
+            <select id="warehouse" name="warehouseId" class="form-control" required>
+                <option th:each="warehouse : ${warehouses}" th:value="${warehouse.id}"
+                        th:text="${warehouse.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" th:value="${stockMovement.quantity}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="movementType">Movement Type:</label>
+            <select id="movementType" name="movementType" class="form-control" required>
+                <option value="IN">In</option>
+                <option value="OUT">Out</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="movementDate">Movement Date:</label>
+            <input type="date" id="movementDate" name="movementDate"
+                   th:value="${#dates.format(stockMovement.movementDate, 'yyyy-MM-dd')}" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Stock Movement</button>
+    </form>
+    <a href="/stockmovements/list" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

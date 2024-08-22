@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<html lang="tr" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title th:title="${title}">Stock Management</title>
+    <title th:text="${title}">Stock Management</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<div class="container mt-4">
-    <!-- Header -->
+<div class="container mt-5">
     <header>
-        <h1>Stock Management</h1>
+        <h1 th:text="${header}">Stock Management System</h1>
         <nav>
-            <a href="/categories/list" class="btn btn-primary">Category List</a>
-            <!-- Diğer bağlantılar -->
+            <a href="/stockmovements/list" class="btn btn-primary">Stock Movements</a>
+            <a href="/products/list" class="btn btn-secondary">Products</a>
+            <!-- Add more links as needed -->
         </nav>
     </header>
 
-    <!-- Content -->
-    <div th:fragment="content">
-        <!-- İçerik buraya eklenecek -->
-    </div>
+    <!-- Main content -->
+    <div th:fragment="content"></div>
 
-
-    <!-- Footer -->
     <footer class="mt-4">
-        <p>&copy; 2024 My Application</p>
+        <p>&copy; 2024 Stock Management</p>
     </footer>
 </div>
 
-<!-- Bootstrap JS, Popper.js, and jQuery -->
+<!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

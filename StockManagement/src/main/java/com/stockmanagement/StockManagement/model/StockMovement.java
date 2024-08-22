@@ -15,7 +15,7 @@ public class StockMovement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     private Product product;
@@ -27,7 +27,9 @@ public class StockMovement {
     private LocalDate movement_date;
     private String movementType; // 'IN' or 'OUT'
 
-    public StockMovement(Long id, Product product, Warehouse warehouse, int quantity, LocalDate movement_date,
+    public StockMovement(){}
+    
+    public StockMovement(int id, Product product, Warehouse warehouse, int quantity, LocalDate movement_date,
                          String movementType) {
         this.id = id;
         this.product = product;
@@ -37,11 +39,11 @@ public class StockMovement {
         this.movementType = movementType;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

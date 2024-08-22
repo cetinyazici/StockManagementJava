@@ -5,10 +5,12 @@ import java.time.LocalDate;
 public class StockMovementDTO {
 
     private int id;
+    private int productId;
+    private int warehouseId;
     private int quantity;
     private LocalDate movementDate;
     private String movementType;
-    private int warehouseId;
+    private String productName;
     private String warehouseName;
 
     public int getId() {
@@ -58,6 +60,23 @@ public class StockMovementDTO {
     public void setWarehouseName(String warehouseName) {
         this.warehouseName = warehouseName;
     }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
 }
 
 
