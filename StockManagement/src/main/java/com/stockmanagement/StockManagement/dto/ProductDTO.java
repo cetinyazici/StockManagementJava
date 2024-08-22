@@ -1,41 +1,33 @@
-package com.stockmanagement.StockManagement.model;
-
-import jakarta.persistence.*;
+package com.stockmanagement.StockManagement.dto;
 
 import java.util.List;
 
-@Entity
-@Table(name = "product")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDTO {
     private int id;
     private String name;
     private String description;
     private double price;
     private int stock_quantity;
     private String barcode;
+    private String categoryName;
+    private String supplierName;
+    private int categoryId;
+    private int supplierId;
 
-    @ManyToOne
-    private Category category;
-
-    @ManyToOne
-    private Supplier supplier;
-
-    public Product() {
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public Product(int id, String name, String description, double price, int stock_quantity, String barcode,
-                   Category category, Supplier supplier) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stock_quantity = stock_quantity;
-        this.barcode = barcode;
-        this.category = category;
-        this.supplier = supplier;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
     }
 
     public int getId() {
@@ -86,20 +78,21 @@ public class Product {
         this.barcode = barcode;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
+
 
 }
