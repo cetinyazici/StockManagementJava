@@ -4,13 +4,16 @@ import com.stockmanagement.StockManagement.dto.StockMovementDTO;
 import com.stockmanagement.StockManagement.mapper.IStockMovementMapper;
 import com.stockmanagement.StockManagement.model.Product;
 import com.stockmanagement.StockManagement.model.StockMovement;
+import com.stockmanagement.StockManagement.model.Warehouse;
 import com.stockmanagement.StockManagement.repository.IStockMovementRepository;
 import com.stockmanagement.StockManagement.service.IProductService;
 import com.stockmanagement.StockManagement.service.IStockMovementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,6 +54,11 @@ public class StockMovementManager implements IStockMovementService {
     @Override
     public StockMovement getById(int id) {
         return repository.getById(id);
+    }
+
+    @Override
+    public long count() {
+        return (int) repository.count();
     }
 
     @Override
@@ -109,4 +117,22 @@ public class StockMovementManager implements IStockMovementService {
         StockMovement stockMovement = repository.getById(id);
         return stockMovement != null ? mapper.toDto(stockMovement) : null;
     }
+
+    @Override
+    public Map<Warehouse, Integer> getStockByWarehouse() {
+        List<StockMovement> movements = repository.getAll();
+        Map<Warehouse, Integer> warehouseStock = new HashMap<>();
+
+        for (StockMovement movement : movements) {
+            Warehouse warehouse = movement.getWarehouse();
+            Product product = movement.getProduct();
+            int quantity = movement.getQuantity();
+            String movementType = movement.getMovementType();
+
+            warehouseStock.put(warehouse, warehouseStock.getOrDefault(warehouse, 0) + quantity);
+        }
+
+        return warehouseStock;
+    }
+
 }

@@ -85,6 +85,11 @@ public class ProductManager implements IProductService {
     }
 
     @Override
+    public long count() {
+        return (int) productRepository.count();
+    }
+
+    @Override
     public ProductDTO getProductDTOById(int id) {
         Product product = getById(id);
         return productMapper.toDto(product);
@@ -96,5 +101,15 @@ public class ProductManager implements IProductService {
         return products.stream()
                 .map(productMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long getTotalStock() {
+        return productRepository.getTotalStock();
+    }
+
+    @Override
+    public List<Product> findByStockQuantityLessThanEqual(int threshold) {
+        return productRepository.findByStockQuantityLessThanEqual(threshold);
     }
 }

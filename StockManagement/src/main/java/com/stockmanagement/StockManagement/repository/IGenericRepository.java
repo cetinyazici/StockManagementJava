@@ -12,4 +12,6 @@ public interface IGenericRepository<T> {
     List<T> getAll();
 
     T getById(int id);
+
+    long count();
 }

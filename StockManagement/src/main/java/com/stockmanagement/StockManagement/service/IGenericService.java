@@ -12,4 +12,6 @@ public interface IGenericService<T> {
     List<T> getAll();
 
     T getById(int id);
+
+    long count();
 }

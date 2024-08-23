@@ -48,4 +48,11 @@ public abstract class GenericRepository<T> implements IGenericRepository<T> {
     public T getById(int id) {
         return manager.find(entityClass, id);
     }
+
+    public long count() {
+        // "SELECT COUNT(e) FROM entityClass e" HQL sorgusu
+        return manager.createQuery("SELECT COUNT(e) FROM " + entityClass.getName() + " e", Long.class)
+                .getSingleResult();
+    }
+
 }

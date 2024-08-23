@@ -42,4 +42,9 @@ public class CategoryManager implements ICategoryService {
     public Category getById(int id) {
         return repository.getById(id);
     }
+
+    @Override
+    public long count() {
+        return (int) repository.count();
+    }
 }

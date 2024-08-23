@@ -10,4 +10,6 @@ public interface IProductService extends IGenericService<Product>{
     void updateProduct(ProductDTO productDTO);
     ProductDTO getProductDTOById(int id);
     List<ProductDTO> getAllProductDTOs();
+    long getTotalStock();
+    List<Product> findByStockQuantityLessThanEqual(int threshold);
 }

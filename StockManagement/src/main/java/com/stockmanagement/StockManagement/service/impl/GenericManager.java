@@ -41,4 +41,9 @@ public class GenericManager <T> implements IGenericService<T> {
     public T getById(int id) {
         return genericRepository.getById(id);
     }
+
+    @Override
+    public long count() {
+        return (int) genericRepository.count();
+    }
 }

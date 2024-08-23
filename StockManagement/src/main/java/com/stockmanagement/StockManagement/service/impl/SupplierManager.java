@@ -41,4 +41,9 @@ public class SupplierManager implements ISupplierService {
     public Supplier getById(int id) {
         return repository.getById(id);
     }
+
+    @Override
+    public long count() {
+        return (int) repository.count();
+    }
 }
