@@ -3,10 +3,11 @@ package com.stockmanagement.StockManagement.service.impl;
 import com.stockmanagement.StockManagement.service.IGenericService;
 import com.stockmanagement.StockManagement.repository.IGenericRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class GenericManager <T> implements IGenericService<T> {
+public class GenericManager<T> implements IGenericService<T> {
     private final IGenericRepository<T> genericRepository;
 
     @Autowired

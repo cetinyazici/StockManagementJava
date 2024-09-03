@@ -67,121 +67,107 @@
             <h3>Admin Dashboard</h3>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/dashboards/index">
+                    <a class="nav-link" href="/dashboards/index">
                         <i class="fas fa-home mr-2"></i>
                         Dashboard
                     </a>
-                </li><!-- End Dashboard Nav -->
+                </li>
                 </br>
                 <li class="nav-heading">Stock Management</li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/products/list">
                         <i class="fas fa-box mr-2"></i>
                         Products
                     </a>
-                </li><!-- End Products Nav -->
-
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/categories/list">
                         <i class="fas fa-tags mr-2"></i>
                         Categories
                     </a>
-                </li><!-- End Categories Nav -->
-
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/warehouses/list">
                         <i class="fas fa-warehouse mr-2"></i>
                         Warehouses
                     </a>
-                </li><!-- End Warehouses Nav -->
-
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/suppliers/list">
                         <i class="fas fa-users mr-2"></i>
                         Suppliers
                     </a>
-                </li><!-- End Suppliers Nav -->
-
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/stockmovements/list">
                         <i class="fas fa-exchange-alt mr-2"></i>
                         Stock Movements
                     </a>
-                </li><!-- End Stock Movements Nav -->
-
+                </li>
                 </br>
                 <li class="nav-heading">User Management</li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
+                    <a class="nav-link active" href="/users/list">
                         <i class="fas fa-user mr-2"></i>
                         Users
                     </a>
-                </li><!-- End Users Nav -->
-
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
+                    <a class="nav-link" href="/roles/list">
                         <i class="fas fa-shield-alt mr-2"></i>
                         Roles
                     </a>
-                </li><!-- End Roles Nav -->
+                </li>
                 </br>
                 <li class="nav-heading">General Pages</li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
+                    <a class="nav-link" href="/profile">
                         <i class="fas fa-user-circle mr-2"></i>
                         Profile
                     </a>
-                </li><!-- End Profile Page Nav -->
-
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
+                    <a class="nav-link" href="/register">
                         <i class="fas fa-user-plus mr-2"></i>
                         Register
                     </a>
-                </li><!-- End Register Page Nav -->
-
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
+                    <a class="nav-link" href="/login">
                         <i class="fas fa-sign-in-alt mr-2"></i>
                         Login
                     </a>
-                </li><!-- End Login Page Nav -->
-
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
+                    <a class="nav-link" href="/logout">
                         <i class="fas fa-sign-out-alt mr-2"></i>
-                        Çıkış Yap
+                        Logout
                     </a>
-                </li><!-- End Logout Nav -->
+                </li>
             </ul>
         </div>
         <div class="col-md-9 content">
             <div class="container">
-                <h1 class="mb-4 text-center"><i class="fas fa-users mr-2"></i> Supplier List</h1>
-                <a href="/suppliers/add" class="btn btn-primary mb-3">Create New Supplier</a>
+                <h1 class="mb-4 text-center"><i class="fas fa-user mr-2"></i> User List</h1>
+                <a href="/auth/register" class="btn btn-primary mb-3">Create New User</a>
                 <table id="myTable" class="table table-striped table-bordered">
                     <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Contact Info</th>
-                        <th>Actions</th>
+                        <th>Username</th>
+                        <th>Roles</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="supplier : ${suppliers}">
-                        <td th:text="${supplier.id}"></td>
-                        <td th:text="${supplier.name}"></td>
-                        <td th:text="${supplier.contact_info}"></td>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.username}"></td>
                         <td>
-                            <a th:href="@{/suppliers/edit/{id}(id=${supplier.id})}"
-                               class="btn btn-success"><i class="bi bi-pencil"></i> Update</a>
-                            <form th:action="@{/suppliers/delete/{id}(id=${supplier.id})}" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-danger"> <i class="bi bi-trash"></i> Delete</button>
-                            </form>
+                            <ul>
+                                <li th:each="role : ${user.authorities}" th:text="${role}"></li>
+                            </ul>
                         </td>
                     </tr>
                     </tbody>
