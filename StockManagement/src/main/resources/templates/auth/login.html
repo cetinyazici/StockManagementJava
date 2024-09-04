@@ -4,13 +4,64 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Arka plan rengi */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .card {
+            width: 100%;
+            max-width: 500px; /* Kartın maksimum genişliği */
+            border-radius: 15px; /* Köşeleri yuvarlat */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Hafif gölge */
+        }
+        .card-header {
+            background-color: #203260;
+            color: #fff;
+            border-bottom: none;
+            border-radius: 15px 15px 0 0; /* Kartın üst köşelerini yuvarlat */
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .btn-primary {
+            background-color: #203260;
+            border-color: #203260;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        .btn-primary:hover {
+            background-color: #172d4e;
+            border-color: #172d4e;
+        }
+        .btn-link {
+            color: #203260;
+        }
+        .btn-link:hover {
+            color: #172d4e;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 10px; /* Inputların köşelerini yuvarlat */
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-5 text-center">Login</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form th:action="@{/auth/login}" method="post" class="mt-4">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2>Login</h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/auth/login}" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="required"/>
@@ -21,7 +72,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
-            <div class="mt-3">
+            <div class="mt-3 text-center">
                 <a href="/auth/register" class="btn btn-link">Register</a>
             </div>
         </div>

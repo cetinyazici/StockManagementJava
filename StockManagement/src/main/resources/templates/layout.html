@@ -3,210 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title th:text="${pageTitle}">Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .sidebar {
-          background-color: #343a40;
-          color: #fff;
-          height: 100vh;
-          padding: 2rem;
-        }
-
-        .sidebar h3 {
-          margin-bottom: 1.5rem;
-        }
-
-        .sidebar .nav-link {
-          color: #adb5bd;
-          padding: 0.5rem 1rem;
-        }
-
-        .sidebar .nav-link:hover {
-          color: #fff;
-          background-color: #495057;
-        }
-
-        .sidebar .nav-link.active {
-          color: #fff;
-          background-color: #007bff;
-        }
-
-        .content {
-          padding: 2rem;
-        }
-
-        .card-stats {
-          border: none;
-          box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-        }
-
-        .card-stats .card-body {
-          padding: 1rem;
-        }
-
-        .card-stats .card-title {
-          margin-bottom: 0.5rem;
-          font-size: 1.1rem;
-        }
-
-        .card-stats .card-text {
-          font-size: 2rem;
-          font-weight: 700;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3 sidebar">
-            <h3>Admin Dashboard</h3>
+            <h5>Stock Management</h5>
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">
-                        <i class="fas fa-home mr-2"></i>
-                        Dashboard
+                <li class="nav-item mt-2">
+                    <a class="nav-link active" href="/dashboards/index">
+                        <i class="fas fa-home mr-2"></i> Dashboard
                     </a>
-                </li><!-- End Dashboard Nav -->
-                </br>
-                <li class="nav-heading">Stock Management</li>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/products/list">
-                        <i class="fas fa-box mr-2"></i>
-                        Products
+                        <i class="fas fa-box mr-2"></i> Products
                     </a>
-                </li><!-- End Products Nav -->
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-tags mr-2"></i>
-                        Categories
+                        <i class="fas fa-tags mr-2"></i> Categories
                     </a>
-                </li><!-- End Categories Nav -->
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/warehouses/list">
-                        <i class="fas fa-warehouse mr-2"></i>
-                        Warehouses
+                        <i class="fas fa-warehouse mr-2"></i> Warehouses
                     </a>
-                </li><!-- End Warehouses Nav -->
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/suppliers/list">
-                        <i class="fas fa-users mr-2"></i>
-                        Suppliers
+                        <i class="fas fa-users mr-2"></i> Suppliers
                     </a>
-                </li><!-- End Suppliers Nav -->
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/stockmovements/list">
-                        <i class="fas fa-exchange-alt mr-2"></i>
-                        Stock Movements
+                        <i class="fas fa-exchange-alt mr-2"></i> Stock Movements
                     </a>
-                </li><!-- End Stock Movements Nav -->
+                </li>
 
-                </br>
-                <li class="nav-heading">User Management</li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-user mr-2"></i>
-                        Users
-                    </a>
-                </li><!-- End Users Nav -->
+                <br>
+                <li class="nav-heading text-uppercase fw-bold">User Management</li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-shield-alt mr-2"></i>
-                        Roles
+                    <a class="nav-link" href="/users/list">
+                        <i class="fas fa-user mr-2"></i> Users
                     </a>
-                </li><!-- End Roles Nav -->
-                </br>
-                <li class="nav-heading">General Pages</li>
+                </li>
+
+                <br>
+                <li class="nav-heading text-uppercase fw-bold">General Pages</li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-user-circle mr-2"></i>
-                        Profile
+                    <a class="nav-link" href="/profile/detail">
+                        <i class="fas fa-user-circle mr-2"></i> Profile
                     </a>
-                </li><!-- End Profile Page Nav -->
+                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-user-plus mr-2"></i>
-                        Register
+                    <a class="nav-link" href="/auth/register">
+                        <i class="fas fa-user-plus mr-2"></i> Register
                     </a>
-                </li><!-- End Register Page Nav -->
+                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-sign-in-alt mr-2"></i>
-                        Login
+                    <a class="nav-link" href="/auth/login">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Login
                     </a>
-                </li><!-- End Login Page Nav -->
+                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories/list">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
-                        Çıkış Yap
+                    <a class="nav-link" href="/logout">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
                     </a>
-                </li><!-- End Logout Nav -->
+                </li>
             </ul>
         </div>
+
         <div class="col-md-9 content">
-            <div class="container mt-5">
-                <h1 class="mb-4 text-center">Admin Dashboard</h1>
-
-                <div class="row">
-                    <!-- Total Products Card -->
-                    <div class="col-md-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="fas fa-box fa-3x mb-3" style="color: #17a2b8;"></i>
-                                <h5 class="card-title">Total Products</h5>
-                                <p class="card-text" th:text="${totalProducts}">0</p>
-                                <a href="/products/list" class="btn btn-outline-primary">View Products</a>
-                                <a href="/products/add" class="btn btn-outline-secondary">Add New Product</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Warehouses Card -->
-                    <div class="col-md-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="fas fa-warehouse fa-3x mb-3" style="color: #28a745;"></i>
-                                <h5 class="card-title">Total Warehouses</h5>
-                                <p class="card-text" th:text="${totalWarehouses}">0</p>
-                                <a href="/warehouses/list" class="btn btn-outline-success">View Warehouses</a>
-                                <a href="/warehouses/add" class="btn btn-outline-secondary">Add New Warehouse</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Suppliers Card -->
-                    <div class="col-md-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="fas fa-truck fa-3x mb-3" style="color: #dc3545;"></i>
-                                <h5 class="card-title">Total Suppliers</h5>
-                                <p class="card-text" th:text="${totalSuppliers}">0</p>
-                                <a href="/suppliers/list" class="btn btn-outline-danger">View Suppliers</a>
-                                <a href="/suppliers/add" class="btn btn-outline-secondary">Add New Supplier</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div th:replace="${pageContent} :: content"></div>
+            <div class="footer">
+                <p>&copy; 2024 Bilgi Teknolojileri ve İletişim Kurumu - BTK - ICT. All rights reserved.</p>
             </div>
         </div>
     </div>
 </div>
 
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/jquery-3.6.0.min.js"></script>
-<script src="/js/jquery.dataTables.min.js"></script>
-<script src="/js/script.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

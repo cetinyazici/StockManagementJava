@@ -1,14 +1,12 @@
 package com.stockmanagement.StockManagement.config;
 
 import com.stockmanagement.StockManagement.security.JwtAuthFilter;
-import com.stockmanagement.StockManagement.service.UserService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import com.stockmanagement.StockManagement.service.impl.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,6 +44,9 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/dashboards/index", true)
                         .permitAll()
                 )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .accessDeniedPage("/access-denied")  // Erişim engellendi sayfasına yönlendirme
+                )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authenticationProvider(authenticationProvider())  // AuthenticationProvider tanımlanır.
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)  // JWT filtreleme, UsernamePasswordAuthenticationFilter'dan önce uygulanır.
@@ -63,7 +64,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // BCryptPasswordEncoder, şifreleri güvenli bir şekilde kodlar.
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

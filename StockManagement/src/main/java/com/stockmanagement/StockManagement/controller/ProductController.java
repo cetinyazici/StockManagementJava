@@ -36,9 +36,12 @@ public class ProductController {
     public String getAllProducts(Model model) {
         List<ProductDTO> products = productService.getAllProductDTOs();
         model.addAttribute("products", products);
-        return "products/list";
+        model.addAttribute("pageTitle", "Products List");
+        model.addAttribute("pageContent", "products/list");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/add")
     public String showAddForm(Model model) {
         ProductDTO products = new ProductDTO();
@@ -47,15 +50,19 @@ public class ProductController {
         model.addAttribute("product", products);
         model.addAttribute("categories", categories);
         model.addAttribute("suppliers", suppliers);
-        return "products/add";
+        model.addAttribute("pageTitle", "Products Add");
+        model.addAttribute("pageContent", "products/add");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addProduct(@ModelAttribute("product") ProductDTO productDTO, Model model) {
         productService.add(productDTO);
         return "redirect:/products/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         ProductDTO productDTO = productService.getProductDTOById(id);
@@ -64,9 +71,12 @@ public class ProductController {
         model.addAttribute("product", productDTO);
         model.addAttribute("categories", categories);
         model.addAttribute("suppliers", suppliers);
-        return "products/edit";
+        model.addAttribute("pageTitle", "Products Edit");
+        model.addAttribute("pageContent", "products/edit");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit/{id}")
     public String updateProduct(@PathVariable int id, @ModelAttribute("product") ProductDTO productDTO) {
         productDTO.setId(id);
@@ -74,6 +84,7 @@ public class ProductController {
         return "redirect:/products/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteProduct(@PathVariable int id) {
         productService.delete(id);

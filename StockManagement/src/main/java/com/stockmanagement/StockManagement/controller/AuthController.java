@@ -2,10 +2,9 @@ package com.stockmanagement.StockManagement.controller;
 
 import com.stockmanagement.StockManagement.dto.CreateUserRequest;
 import com.stockmanagement.StockManagement.model.Role;
-import com.stockmanagement.StockManagement.service.UserService;
+import com.stockmanagement.StockManagement.service.impl.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

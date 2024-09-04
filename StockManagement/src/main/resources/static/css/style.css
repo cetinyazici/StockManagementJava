@@ -1,57 +1,44 @@
-        body {
+body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
         .sidebar {
-          background-color: #343a40;
-          color: #fff;
-          height: 100vh;
-          padding: 2rem;
+            background-color: #203260;
+            color: #fff;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            padding: 20px;
+            overflow-y: auto;
         }
-
-        .sidebar h3 {
-          margin-bottom: 1.5rem;
+        .sidebar .nav-item {
+            margin-bottom: 10px;
         }
-
         .sidebar .nav-link {
-          color: #adb5bd;
-          padding: 0.5rem 1rem;
+            color: #fff;
         }
-
-        .sidebar .nav-link:hover {
-          color: #fff;
-          background-color: #495057;
-        }
-
         .sidebar .nav-link.active {
-          color: #fff;
-          background-color: #007bff;
+            background-color: #203280;
+            border-radius: 5px;
         }
-
         .content {
-          padding: 2rem;
+            margin-left: 250px;
+            padding: 20px;
+            flex: 1;
         }
-
         .card-stats {
-          border: none;
-          box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            margin-bottom: 20px;
         }
-
-        .card-stats .card-body {
-          padding: 1rem;
+        .dashboard-card {
+            margin-bottom: 20px;
         }
-
-        .card-stats .card-title {
-          margin-bottom: 0.5rem;
-          font-size: 1.1rem;
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
         }
-
-        .card-stats .card-text {
-          font-size: 2rem;
-          font-weight: 700;
-        }
-
-
-

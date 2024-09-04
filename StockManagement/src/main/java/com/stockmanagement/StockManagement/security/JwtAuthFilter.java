@@ -1,6 +1,6 @@
 package com.stockmanagement.StockManagement.security;
 
-import com.stockmanagement.StockManagement.service.UserService;
+import com.stockmanagement.StockManagement.service.impl.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

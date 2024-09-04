@@ -1,15 +1,13 @@
 package com.stockmanagement.StockManagement.controller;
 
 import com.stockmanagement.StockManagement.model.User;
-import com.stockmanagement.StockManagement.service.UserService;
+import com.stockmanagement.StockManagement.service.impl.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -18,9 +16,11 @@ import java.util.Optional;
 public class ProfileController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/detail")
@@ -29,7 +29,9 @@ public class ProfileController {
         String username = authentication.getName();
         Optional<User> user = userService.findByUsername(username);
         model.addAttribute("user", user.orElse(null));
-        return "profile/detail";
+        model.addAttribute("pageTitle", "Profile");
+        model.addAttribute("pageContent", "profile/detail");
+        return "layout";
     }
 
     @GetMapping("/edit")
@@ -38,25 +40,20 @@ public class ProfileController {
         String username = authentication.getName();
         Optional<User> user = userService.findByUsername(username);
         model.addAttribute("user", user.orElse(null));
-        return "profile/edit";
+        model.addAttribute("pageTitle", "Profile Edit");
+        model.addAttribute("pageContent", "profile/edit");
+        return "layout";
     }
 
     @PostMapping("/edit")
-    public String editProfile(@ModelAttribute User user, Model model) {
-        // Kullanıcının kimliğini kontrol et
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Optional<User> existingUser = userService.findByUsername(username);
-
-        if (existingUser.isPresent()) {
-            User updatedUser = existingUser.get();
-            updatedUser.setName(user.getName());
-            updatedUser.setPassword(user.getPassword()); // Parola şifreleme gerekli olabilir
-
-            userService.save(updatedUser);
-            model.addAttribute("user", updatedUser);
+    public String editProfile(@ModelAttribute User user, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model) {
+        boolean isUpdated = userService.updateProfile(user, oldPassword, newPassword);
+        if (isUpdated) {
+            return "redirect:/profile/detail";
+        } else {
+            model.addAttribute("error", "Eski şifre yanlış!");
+            model.addAttribute("user", user);
+            return "profile/edit";
         }
-
-        return "redirect:/profile/detail";
     }
 }

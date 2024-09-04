@@ -32,9 +32,12 @@ public class StockMovementController {
     public String getAllStockMovements(Model model) {
         List<StockMovementDTO> stockMovements = stockMovementService.getAllStockMovement();
         model.addAttribute("stockMovements", stockMovements);
-        return "stockmovements/list";
+        model.addAttribute("pageTitle", "Stockmovement List");
+        model.addAttribute("pageContent", "stockmovements/list");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/add")
     public String showAddForm(Model model) {
         StockMovementDTO stockMovementDTO = new StockMovementDTO();
@@ -44,15 +47,19 @@ public class StockMovementController {
         model.addAttribute("stockMovement", stockMovementDTO);
         model.addAttribute("products", products);
         model.addAttribute("warehouses", warehouses);
-        return "stockmovements/add";
+        model.addAttribute("pageTitle", "Stockmovement Add");
+        model.addAttribute("pageContent", "stockmovements/add");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addStockMovement(@ModelAttribute("stockMovement") StockMovementDTO stockMovementDTO) {
         stockMovementService.createStockMovement(stockMovementDTO);
         return "redirect:/stockmovements/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         StockMovementDTO stockMovementDTO = stockMovementService.getByIdStockMovement(id);
@@ -69,10 +76,12 @@ public class StockMovementController {
         // Layout-specific attributes
         model.addAttribute("title", "Edit Stock Movement");
         model.addAttribute("header", "Edit Stock Movement");
-        return "stockmovements/edit";
+        model.addAttribute("pageTitle", "Stockmovement Edit");
+        model.addAttribute("pageContent", "stockmovements/edit");
+        return "layout";
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit/{id}")
     public String updateStockMovement(@PathVariable int id, @ModelAttribute("stockMovement") StockMovementDTO stockMovementDTO) {
         stockMovementDTO.setId(id);
@@ -80,6 +89,7 @@ public class StockMovementController {
         return "redirect:/stockmovements/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteStockMovement(@PathVariable int id) {
         stockMovementService.delete(id);

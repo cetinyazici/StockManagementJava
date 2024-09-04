@@ -28,28 +28,38 @@ public class WarehaouseController {
     public String getAllWarehouse(Model model) {
         List<Warehouse> warehouses = service.getAll();
         model.addAttribute("warehouses", warehouses);
-        return "warehouses/list";
+        model.addAttribute("pageTitle", "Warehouse List");
+        model.addAttribute("pageContent", "warehouses/list");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("warehouse", new Warehouse());
-        return "warehouses/add";
+        model.addAttribute("pageTitle", "Warehouse Add");
+        model.addAttribute("pageContent", "warehouses/add");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addWarehouse(Warehouse warehouse) {
         service.create(warehouse);
         return "redirect:/warehouses/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         Warehouse warehouse = service.getById(id);
         model.addAttribute("warehouse", warehouse);
-        return "warehouses/edit";
+        model.addAttribute("pageTitle", "Warehouse Edit");
+        model.addAttribute("pageContent", "warehouses/edit");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Warehouse warehouse) {
         warehouse.setId(id);
@@ -57,6 +67,7 @@ public class WarehaouseController {
         return "redirect:/warehouses/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteWarehouse(@PathVariable int id) {
         service.delete(id);

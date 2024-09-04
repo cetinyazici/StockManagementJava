@@ -29,28 +29,38 @@ public class CategoryController {
     public String getAllCategories(Model model) {
         List<Category> categories = service.getAll();
         model.addAttribute("categories", categories);
-        return "categories/list";
+        model.addAttribute("pageTitle", "Categories List");
+        model.addAttribute("pageContent", "categories/list");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("category", new Category());
-        return "categories/add";
+        model.addAttribute("pageTitle", "Categories Add");
+        model.addAttribute("pageContent", "categories/add");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addCategory(Category category) {
         service.create(category);
         return "redirect:/categories/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         Category category = service.getById(id);
         model.addAttribute("category", category);
-        return "categories/edit";
+        model.addAttribute("pageTitle", "Categories Edit");
+        model.addAttribute("pageContent", "categories/edit");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit/{id}")
     public String editCategory(@PathVariable int id, Category category) {
         category.setId(id);
@@ -58,6 +68,7 @@ public class CategoryController {
         return "redirect:/categories/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteCategory(@PathVariable int id) {
         service.delete(id);

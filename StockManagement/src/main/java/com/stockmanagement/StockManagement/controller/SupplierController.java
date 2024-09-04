@@ -29,28 +29,38 @@ public class SupplierController {
     public String getAllSuppliers(Model model) {
         List<Supplier> suppliers = service.getAll();
         model.addAttribute("suppliers", suppliers);
-        return "suppliers/list";
+        model.addAttribute("pageTitle", "Suppliers List");
+        model.addAttribute("pageContent", "suppliers/list");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("supplier", new Supplier());
-        return "suppliers/add";
+        model.addAttribute("pageTitle", "Supplier Add");
+        model.addAttribute("pageContent", "suppliers/add");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addSupplier(Supplier supplier) {
         service.create(supplier);
         return "redirect:/suppliers/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         Supplier supplier = service.getById(id);
         model.addAttribute("supplier", supplier);
-        return "suppliers/edit";
+        model.addAttribute("pageTitle", "Suppliers Edit");
+        model.addAttribute("pageContent", "suppliers/edit");
+        return "layout";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit/{id}")
     public String editSupplier(@PathVariable int id, Supplier supplier) {
         supplier.setId(id);
@@ -58,6 +68,7 @@ public class SupplierController {
         return "redirect:/suppliers/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteSupplier(@PathVariable int id) {
         service.delete(id);

@@ -1,15 +1,15 @@
 package com.stockmanagement.StockManagement.controller;
 
 import com.stockmanagement.StockManagement.dto.CreateUserRequest;
-import com.stockmanagement.StockManagement.model.Category;
 import com.stockmanagement.StockManagement.model.User;
-import com.stockmanagement.StockManagement.service.UserService;
+import com.stockmanagement.StockManagement.service.impl.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@PreAuthorize("hasRole('ADMIN')")
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -24,7 +24,9 @@ public class UserController {
     public String listUsers(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "users/list";
+        model.addAttribute("pageTitle", "Users List");
+        model.addAttribute("pageContent", "users/list");
+        return "layout";
     }
 
     // Kullanıcı düzenleme sayfasını döndürür

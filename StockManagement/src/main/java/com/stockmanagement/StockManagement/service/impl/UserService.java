@@ -1,4 +1,4 @@
-package com.stockmanagement.StockManagement.service;
+package com.stockmanagement.StockManagement.service.impl;
 
 import com.stockmanagement.StockManagement.dto.CreateUserRequest;
 import com.stockmanagement.StockManagement.model.User;
@@ -17,7 +17,6 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder) {
@@ -63,8 +62,30 @@ public class UserService implements UserDetailsService {
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    public boolean updateProfile(User user, String oldPassword, String newPassword) {
+        Optional<User> existingUser = getByUsername(user.getUsername());
+
+        if (existingUser.isPresent()) {
+            User updatedUser = existingUser.get();
+
+            // Eski şifreyi kontrol et
+            if (passwordEncoder.matches(oldPassword, updatedUser.getPassword())) {
+                updatedUser.setName(user.getName());
+
+                // Yeni şifreyi kontrol et ve şifreleme işlemi yap
+                if (newPassword != null && !newPassword.isEmpty()) {
+                    updatedUser.setPassword(passwordEncoder.encode(newPassword));
+                }
+                save(updatedUser);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

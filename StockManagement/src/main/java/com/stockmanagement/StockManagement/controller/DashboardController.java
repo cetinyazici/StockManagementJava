@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.Map;
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @Controller
 @RequestMapping("dashboards")
 public class DashboardController {
@@ -32,7 +32,7 @@ public class DashboardController {
         this.stockMovementService = stockMovementService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @GetMapping("/index")
     public String index(Model model) {
         long totalProducts = productService.count();
@@ -42,13 +42,15 @@ public class DashboardController {
         List<Product> criticalStockLevels = productService.findByStockQuantityLessThanEqual(10);
         Map<Warehouse, Integer> stockByWarehouse = stockMovementService.getStockByWarehouse();
 
-
         model.addAttribute("totalProducts", totalProducts);
         model.addAttribute("totalSuppliers", totalSuppliers);
         model.addAttribute("totalWarehouses", totalWarehouses);
         model.addAttribute("totalStocks", totalStocks);
         model.addAttribute("criticalStockLevels", criticalStockLevels);
         model.addAttribute("stockByWarehouse", stockByWarehouse);
-        return "dashboards/index";
+        model.addAttribute("pageTitle", "Dashboard");
+        model.addAttribute("pageContent", "dashboards/index");
+        return "layout";
+//        return "dashboards/index";
     }
 }
